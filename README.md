@@ -43,7 +43,7 @@ $ pico /var/www/MEUSITE.com.br/public_html/index.php
 <?php phpinfo(); ?>
 ```
 
-#### Realize o donwload do wordpress:
+#### Realize o download do wordpress:
 ```
 $ wget https://br.wordpress.org/latest-pt_BR.tar.gz -O /var/www/MEUSITE.com.br/public_html/wordpress.tar.gz
 ```
@@ -51,6 +51,9 @@ $ wget https://br.wordpress.org/latest-pt_BR.tar.gz -O /var/www/MEUSITE.com.br/p
 #### Configure o arquivo para o host virtual no apache:
 ```
 $ sudo vi /etc/apache2/sites-available/MEUSITE.com.br.conf
+```
+
+```
 <VirtualHost *:80>
     ServerAdmin support@MEUSITE.com.br
     ServerName MEUSITE.com.br
@@ -65,6 +68,9 @@ $ sudo vi /etc/apache2/sites-available/MEUSITE.com.br.conf
 #### Adicione o ServerName no final do arquivo apache2.conf:
 ```
 $ sudo pico /etc/apache2/apache2.conf
+```
+
+```
 ServerName localhost
 ```
 
@@ -84,7 +90,7 @@ $ sudo apt install mysql-server mysql-client php libapache2-mod-php php-mysql ph
 
 ```
 ##### phpmyadmin:
-> Edite o arquivo apache2.conf e adicione a linha Include no final do arquivo para que voce consiga acessar o phpmyadmin em http://localhost/phpmyadmin
+> Edite o arquivo apache2.conf e adicione a linha ```Include``` no final do arquivo para que voce consiga acessar o phpmyadmin em http://localhost/phpmyadmin
 ```
 $ sudo vim /etc/apache2/apache2.conf
 Include /etc/phpmyadmin/apache.conf
@@ -94,7 +100,7 @@ Include /etc/phpmyadmin/apache.conf
 $ sudo systemctl restart apache2
 ```
 
-## Configure useario e senha no mysql com usuario root e de as devidas permissões:  
+## Configure usuario e senha no mysql com usuario root e de as devidas permissões:  
 ```
 $ mysql -u root -p
 ```
@@ -112,6 +118,7 @@ $ mysql -u admin -p
 
 ```
 mysql> show databases;
+mysql> use wordpress;
 mysql> quit;
 ```
 
@@ -123,7 +130,7 @@ $ mv /var/www/MEUSITE.com.br/public_html/wordpress.tar.gz /var/www/MEUSITE.com.b
 $ rm -rf /var/www/MEUSITE.com.br/public_html/wordpress
 ```
 
-#### De permissão da web para usuario www-data para que o wordpress seja instalado corretamente:
+#### De permissão para o usuario web www-data para que o wordpress seja instalado corretamente:
 ```
 $ sudo chown -Rf www-data:www-data /var/www/MEUSITE.com.br/public_html
 ```
